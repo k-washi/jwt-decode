@@ -29,9 +29,9 @@ func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 
 //DecodeClaim
 func (s *jwtDecode) DecodeClaimFB(payload string) (*FireBaseCustomToken, error) {
-	log.Printf("decode str:" + payload)
+	log.Printf("decode str:" + payload + "\n")
 	payloadByte, err := base64.StdEncoding.DecodeString(payload)
-	log.Printf("decode byte:" + payloadByte)
+	log.Printf("decode byte:" + string(payloadByte) + "\n")
 	if err != nil {
 		return nil, errors.New("Error jwt token decode: " + err.Error())
 	}
