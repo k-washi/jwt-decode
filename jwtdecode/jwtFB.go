@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"strings"
 
 	"firebase.google.com/go/auth"
@@ -23,15 +22,13 @@ func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 	if len(hCS) == 3 {
 		return hCS, nil
 	}
-	return nil, errors.New("Error jwt str decompose: jwt structure don't match")
+	return nil, errors.New("Error jwt str decompose: inccorrect number of segments")
 
 }
 
 //DecodeClaim
 func (s *jwtDecode) DecodeClaimFB(payload string) (*FireBaseCustomToken, error) {
-	log.Printf("decode str:" + payload + "\n")
-	payloadByte, err := base64.StdEncoding.DecodeString(payload)
-	log.Printf("decode byte:" + string(payloadByte) + "\n")
+	payloadByte, err := base64.RawURLEncoding.DecodeString(payload)
 	if err != nil {
 		return nil, errors.New("Error jwt token decode: " + err.Error())
 	}
@@ -42,6 +39,6 @@ func (s *jwtDecode) DecodeClaimFB(payload string) (*FireBaseCustomToken, error) 
 		fmt.Println("Error: ", err)
 		return nil, errors.New("Error jwt token unmarshal: " + err.Error())
 	}
-	log.Println("decode json:", tokenJSON)
+
 	return &tokenJSON, nil
 }
