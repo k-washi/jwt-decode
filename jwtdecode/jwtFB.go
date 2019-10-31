@@ -16,7 +16,7 @@ type FireBaseCustomToken struct {
 	Email string `json:"email"`
 }
 
-//DecomposeFB  jwt in firebase authorization decompose header and claim, signature
+//DecomposeFB  jwt in firebase authorization decompose header and payload claim, signature
 func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 	hCS := strings.Split(jwt, ".")
 	if len(hCS) == 3 {
@@ -26,7 +26,7 @@ func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 
 }
 
-//DecodeClaim
+//DecodeClaimFB convert the payload obtained by decomposing jwt to FireBaseCustomToken struct
 func (s *jwtDecode) DecodeClaimFB(payload string) (*FireBaseCustomToken, error) {
 	payloadByte, err := base64.RawURLEncoding.DecodeString(payload)
 	if err != nil {
