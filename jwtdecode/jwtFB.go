@@ -10,13 +10,25 @@ import (
 	"firebase.google.com/go/auth"
 )
 
-//FireBaseCustomToken auth.token add email
+//FireBaseCustomToken auth.tokenをemailで拡張
+/*
+	type Token struct{
+		Issuer string "json:\"iss\"";
+		Audience string "json:\"aud\"";
+		Expires int64 "json:\"exp\"";
+		IssuedAt int64 "json:\"iat\"";
+		Subject string "json:\"sub,omitempty\"";
+		UID string "json:\"uid,omitempty\"";
+		Claims map[string]interface{}
+		"json:\"-\""
+	}
+*/
 type FireBaseCustomToken struct {
 	auth.Token
 	Email string `json:"email"`
 }
 
-//DecomposeFB  jwt in firebase authorization decompose header and payload claim, signature
+//DecomposeFB  JWTをHeader, claims, 署名に分解
 func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 	hCS := strings.Split(jwt, ".")
 	if len(hCS) == 3 {
@@ -26,7 +38,7 @@ func (s *jwtDecode) DecomposeFB(jwt string) ([]string, error) {
 
 }
 
-//DecodeClaimFB convert the payload obtained by decomposing jwt to FireBaseCustomToken struct
+//DecodeClaimFB JWTのclaims部分をFireBaseCustomTokenの構造体にデコード
 func (s *jwtDecode) DecodeClaimFB(payload string) (*FireBaseCustomToken, error) {
 	payloadByte, err := base64.RawURLEncoding.DecodeString(payload)
 	if err != nil {

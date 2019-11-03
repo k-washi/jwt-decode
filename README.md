@@ -17,4 +17,5 @@ jwtのpayloadは以下のように表現されている。
 
 ```json
 {"name":"testuser","iss":"https://securetoken.google.com/ex-firebase-auth","aud":"ex-firebase-auth","auth_time":1572322174,"user_id":"qZhsF2HfuWZEBghFa4nl2Kidyp22","sub":"qZhsF2HfuWZEBghFa4nl2Kidyp22","iat":1572322174,"exp":1572325774,"email":"test@test.com","email_verified":false,"firebase":{"identities":{"email":["test@test.com"]},"sign_in_provider":"password"}}
+
 ```
