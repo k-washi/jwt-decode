@@ -4,6 +4,12 @@
 
 Parse user information from JWT created by firebase
 
+## Install
+
+```bash
+go get -u "github.com/k-washi/jwt-decode/jwtdecode"
+``` 
+
 ## example
 
 ```bash
